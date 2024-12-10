@@ -5,10 +5,14 @@ import com.atguigu.lease.common.result.Result;
 import com.atguigu.lease.model.entity.AttrKey;
 import com.atguigu.lease.model.entity.AttrValue;
 import com.atguigu.lease.web.admin.service.AttrKeyService;
+import com.atguigu.lease.web.admin.service.AttrValueService;
 import com.atguigu.lease.web.admin.vo.attr.AttrKeyVo;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +25,8 @@ public class AttrController {
 
     @Autowired
     private AttrKeyService attrKeyService;
+    @Autowired
+    private AttrValueService attrValueService;
 
     @Operation(summary = "新增或更新属性名称")
     @PostMapping("key/saveOrUpdate")
@@ -32,7 +38,7 @@ public class AttrController {
     @Operation(summary = "新增或更新属性值")
     @PostMapping("value/saveOrUpdate")
     public Result saveOrUpdateAttrValue(@RequestBody AttrValue attrValue) {
-
+        attrValueService.saveOrUpdate(attrValue);
         return Result.ok();
     }
 
@@ -40,18 +46,28 @@ public class AttrController {
     @Operation(summary = "查询全部属性名称和属性值列表")
     @GetMapping("list")
     public Result<List<AttrKeyVo>> listAttrInfo() {
-        return Result.ok();
+        List<AttrKeyVo> list = attrKeyService.listAttrInfo();
+        return Result.ok(list);
     }
 
     @Operation(summary = "根据id删除属性名称")
     @DeleteMapping("key/deleteById")
+    @Transactional
     public Result removeAttrKeyById(@RequestParam Long attrKeyId) {
+        attrKeyService.removeById(attrKeyId);
+
+        LambdaQueryWrapper<AttrValue> attrValueLambdaUpdateWrapper = new LambdaQueryWrapper<>();
+
+        attrValueLambdaUpdateWrapper.eq(AttrValue::getAttrKeyId, attrKeyId);
+        attrValueService.remove(attrValueLambdaUpdateWrapper);
+
         return Result.ok();
     }
 
     @Operation(summary = "根据id删除属性值")
     @DeleteMapping("value/deleteById")
     public Result removeAttrValueById(@RequestParam Long id) {
+        attrValueService.removeById(id);
         return Result.ok();
     }
 
