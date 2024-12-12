@@ -29,8 +29,7 @@ public class FileUploadController {
     @Operation(summary = "上传文件")
     @PostMapping("upload")
     public Result<String> upload(@RequestParam MultipartFile file) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-        String url = null;
-        url = fileService.upload(file);
+        String url = fileService.upload(file);
         return Result.ok(url);
 
     }
