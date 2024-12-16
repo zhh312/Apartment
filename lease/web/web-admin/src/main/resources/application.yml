@@ -19,6 +19,11 @@ spring:
       maximum-pool-size: 12 #连接池最大连接数，默认是10
       minimum-idle: 10 #最小空闲连接数量
       pool-name: SPHHikariPool # 连接池名称
+  data:
+    redis:
+      host: 192.168.244.129
+      port: 6379
+      database: 0
 #  datasource:
 #    url: jdbc:mysql://192.168.244.129:3306/lease
 #    username: root
@@ -44,3 +49,5 @@ minio:
 
 springdoc:
   default-flat-param-object: true
+
+
