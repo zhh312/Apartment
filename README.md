@@ -2,6 +2,8 @@
 
 ## Overview
 The **Apartment Rental Platform** is a comprehensive system that includes both a **mobile application** for tenants and a **backend management system** for administrators. The platform streamlines apartment searching, viewing appointments, lease management, and property administration.
+Admin App: http://39.105.202.74:8092
+Mobile App: http://39.105.202.74:8093
 
 ## Tech Stack
 - **Frontend:** Vue 3
@@ -36,7 +38,7 @@ There are 7 lease statuses: **Pending Confirmation, Active, Canceled, Expired, T
 1. Clone the repository:
    ```sh
    git clone https://github.com/zhh312/Apartment.git
-   cd Apartment/backend
+   cd Apartment/lease
    ```
 2. Update **application.properties**:
    ```properties
@@ -65,10 +67,7 @@ There are 7 lease statuses: **Pending Confirmation, Active, Canceled, Expired, T
    ```
 
 ### Database Setup
-1. Create the database:
-   ```sql
-   CREATE DATABASE apartment_rental;
-   ```
+1. Create Database use lease.sql file
 2. The system will automatically generate tables using MyBatis Plus.
 
 ## Deployment
@@ -79,8 +78,7 @@ The project follows a structured **development lifecycle**:
 4. Frontend & Backend Development
 5. Testing & QA
 6. Deployment & Maintenance
-Admin App: http://39.105.202.74:8092
-Mobile App: http://39.105.202.74:8093
+
 
 ## Prototype
 - **Mobile App Prototype:** [View Here](https://modao.cc/proto/yaPxwdkwrvtlaepAbqZzO/sharing?view_mode=device&screen=rbpTgNkz0plpyCNJi&canvasId=rcTgNntk14ENgkLr)
