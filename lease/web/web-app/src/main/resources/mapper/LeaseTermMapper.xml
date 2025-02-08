@@ -5,4 +5,33 @@
 <mapper namespace="com.atguigu.lease.web.app.mapper.LeaseTermMapper">
 
 
+    <select id="selectListByRoomId" resultType="com.atguigu.lease.model.entity.LeaseTerm">
+        select id,
+               month_count,
+               unit
+        from lease_term
+        where is_deleted = 0
+          and id in (select lease_term_id
+                     from room_lease_term
+                     where is_deleted = 0
+                       and room_id = #{id})
+    </select>
+    <select id="selectLeaseTermById" resultType="com.atguigu.lease.model.entity.LeaseTerm">
+        select id,
+               month_count,
+               unit
+        from lease_term
+        where id = #{leaseTermId} and is_deleted=0
+    </select>
+    <select id="listByRoomId" resultType="com.atguigu.lease.model.entity.LeaseTerm">
+        select
+               lt.id,
+               lt.month_count,
+               lt.unit
+        from room_lease_term rt
+                 left join lease_term lt on rt.lease_term_id = lt.id and lt.is_deleted = 0
+        where rt.is_deleted=0
+          and rt.room_id = #{id}
+
+    </select>
 </mapper>

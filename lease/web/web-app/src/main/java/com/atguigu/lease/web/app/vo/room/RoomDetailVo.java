@@ -14,6 +14,8 @@ import java.util.List;
 @Schema(description = "APP房间详情")
 public class RoomDetailVo extends RoomInfo {
 
+
+
     @Schema(description = "所属公寓信息")
     private ApartmentItemVo apartmentItemVo;
 

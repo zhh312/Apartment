@@ -14,4 +14,7 @@ import java.util.List;
 */
 public interface ViewAppointmentService extends IService<ViewAppointment> {
 
+    List<AppointmentItemVo> listItem();
+
+    AppointmentDetailVo getDetailById(Long id);
 }

@@ -1,8 +1,10 @@
 package com.atguigu.lease.web.app.controller.login;
 
 
+import com.atguigu.lease.common.login.LoginUserContext;
 import com.atguigu.lease.common.result.Result;
 import com.atguigu.lease.web.app.service.LoginService;
+import com.atguigu.lease.web.app.service.impl.LoginServiceImpl;
 import com.atguigu.lease.web.app.vo.user.LoginVo;
 import com.atguigu.lease.web.app.vo.user.UserInfoVo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,13 +31,17 @@ public class LoginController {
     @PostMapping("login")
     @Operation(summary = "登录")
     public Result<String> login(@RequestBody LoginVo loginVo) {
-        return Result.ok();
+        String token = loginService.login(loginVo);
+        return Result.ok(token);
     }
 
     @GetMapping("info")
     @Operation(summary = "获取登录用户信息")
     public Result<UserInfoVo> info() {
-        return Result.ok();
+        Long userId = LoginUserContext.getLoginUser().getUserId();
+        UserInfoVo res = loginService.getLoginUserById(userId);
+
+        return Result.ok(res);
     }
 }
 

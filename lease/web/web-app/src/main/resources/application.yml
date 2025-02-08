@@ -38,3 +38,8 @@ mybatis-plus:
 
 springdoc:
   default-flat-param-object: true
+app:
+  auth:
+    path-patterns:
+      include: /app/**
+      exclude: /app/login/**

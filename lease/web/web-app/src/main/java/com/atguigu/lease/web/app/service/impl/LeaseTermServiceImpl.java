@@ -18,7 +18,12 @@ import java.util.List;
 public class LeaseTermServiceImpl extends ServiceImpl<LeaseTermMapper, LeaseTerm>
     implements LeaseTermService{
 
-
+    @Autowired
+    LeaseTermMapper leaseTermMapper;
+    @Override
+    public List<LeaseTerm> listByRoomId(Long id) {
+        return leaseTermMapper.listByRoomId(id);
+    }
 }
 
 
